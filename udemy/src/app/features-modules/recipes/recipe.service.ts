@@ -1,5 +1,8 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Ingredient } from 'src/app/shared/ingredient.model';
 import { Recipe } from './recipe.model';
+
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +11,33 @@ export class RecipeService {
   @Output() recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
-    new Recipe('A Test Recipe1','This 1 is a test','https://images.immediate.co.uk/production/volatile/sites/2/2019/05/Caramalised-pork-ribs-10376c4.jpg?quality=90&crop=14px,1640px,5942px,2556px&resize=556,505'),
-    new Recipe('A Test Recipe2','This 2 is a test','https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-    new Recipe('A Test Recipe3','This 3 is a test','https://cdn.pixabay.com/photo/2014/02/27/16/10/flowers-276014__340.jpg')
-  ];
+    new Recipe(
+      'Tasty Schnitzel',
+      'Super tasty Schnitzel that is just awesome!',
+      'https://www.daringgourmet.com/wp-content/uploads/2014/03/Schnitzel-5.jpg',
+      [ 
+        new Ingredient('Meat',1),
+        new Ingredient('Fries',20),
+      ]
+    ),
+    new Recipe(
+      'Big Fat Burger',
+      'What else do I need to say',
+      'https://img.theculturetrip.com/wp-content/uploads/2016/06/the-ship-indian-summer-burger.jpg',
+      [
+        new Ingredient('Buns',2),
+        new Ingredient('Meat',1),]
+    ),
+];
 
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   getRecipes(){
     return this.recipes.slice()
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]){
+    this.shoppingListService.ingredientsAdd(ingredients);
   }
 
 
