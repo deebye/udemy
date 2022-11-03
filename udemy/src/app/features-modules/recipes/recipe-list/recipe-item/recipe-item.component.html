@@ -1,1 +1,11 @@
-<p>recipe-item works!</p>
+<a href="#" (click)="onSelected(recipe)" class="list-group-item clearfix bg-white rounded shadow-sm border">
+    <div class="d-flex bd-highlight p-2">
+        <div class=" flex-grow-1 bd-highlight">
+            <h4 class="list-group-item-heading">{{recipe.name}}</h4>
+            <p class="list-group-item-text">{{recipe.description}}</p>
+        </div>
+        <img [src]="recipe.imagePath" class="img-responsive rounded" [alt]="recipe.name">
+    </div>
+</a>
+
+

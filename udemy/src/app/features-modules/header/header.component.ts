@@ -6,6 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  showMenu: boolean = false;
 
   @Output() featureSelected = new EventEmitter<string>();
 
@@ -17,5 +18,4 @@ export class HeaderComponent implements OnInit {
   onSelect(feature: string){
     this.featureSelected.emit(feature);
   }
-
 }
